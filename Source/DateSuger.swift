@@ -226,49 +226,54 @@ extension NSDate {
         return DefaultCalendar.dateFromComponents(components)
     }
 }
+
+//MARK: - NSDateComponents
+extension NSDateComponents {
+    static func componetWithType(type: DSDateComponentType, value: Int) -> NSDateComponents {
+        let component = NSDateComponents()
+        switch type {
+        case .Year:
+            component.year = value
+        case .Month:
+            component.month = value
+        case .Day:
+            component.day = value
+        case .Hour:
+            component.hour = value
+        case .Minute:
+            component.minute = value
+        case .Second:
+            component.second = value
+        case .WeekOfYear:
+            component.weekOfYear = value
+        default: ()
+        }
+        return component
+    }
+}
+
 // MARK: - Date Editing
 extension NSDate {
     public func dateByAddingYears(years: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.year = years
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Year, value: years), toDate: self, options: [])!
     }
     public func dateByAddingMonths(months: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.month = months
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Month, value: months), toDate: self, options: [])!
     }
     public func dateByAddingWeeks(weeks: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.weekOfYear = weeks
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.WeekOfYear, value: weeks), toDate: self, options: [])!
     }
     public func dateByAddingDays(days: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.day = days
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Day, value: days), toDate: self, options: [])!
     }
     public func dateByAddingHours(hours: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.hour = hours
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Hour, value: hours), toDate: self, options: [])!
     }
     public func dateByAddingMinutes(minutes: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.minute = minutes
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Minute, value: minutes), toDate: self, options: [])!
     }
     public func dateByAddingSeconds(seconds: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.second = seconds
-        
-        return DefaultCalendar.dateByAddingComponents(components, toDate: self, options: [])!
+        return DefaultCalendar.dateByAddingComponents(NSDateComponents.componetWithType(.Second, value: seconds), toDate: self, options: [])!
     }
     public func dateBySubtractingYears(years: Int) -> NSDate {
         return dateByAddingYears(-years)
